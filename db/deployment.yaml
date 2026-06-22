@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: navyojana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: 069301570663.dkr.ecr.us-east-2.amazonaws.com/mysql-image:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "mysql123"
+        - name: MYSQL_DATABASE
+          value: "school"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+  namespace: navyojana
+spec:
+  selector:
+    app: mysql
+  ports:
+  - port: 3306
+    targetPort: 3306
+  type: ClusterIP
