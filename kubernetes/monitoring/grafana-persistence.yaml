@@ -1,0 +1,7 @@
+grafana:
+  persistence:
+    enabled: true
+    storageClassName: gp3
+    accessModes:
+      - ReadWriteOnce
+    size: 10Gi
