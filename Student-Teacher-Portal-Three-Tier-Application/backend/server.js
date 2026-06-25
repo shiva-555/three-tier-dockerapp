@@ -8,9 +8,13 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
+  next();
+});
+
 let db;
 
-// 🔁 MySQL Connection with Retry Logic
 const connectWithRetry = async (retries = 10, delay = 3000) => {
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
@@ -33,7 +37,6 @@ const connectWithRetry = async (retries = 10, delay = 3000) => {
   }
 };
 
-// 🧱 Ensure Required Tables Exist
 const ensureTables = async (db) => {
   try {
     await db.query(`
@@ -63,25 +66,21 @@ const ensureTables = async (db) => {
   }
 };
 
-// 🌐 Initialize Database Connection Before Starting Server
 (async () => {
   try {
     db = await connectWithRetry();
     await ensureTables(db);
 
-    // 💥 Global unhandled promise rejection handler
     process.on('unhandledRejection', (reason, promise) => {
       console.error('Unhandled Rejection at:', promise, 'reason:', reason);
     });
 
-    // Graceful shutdown
     process.on('SIGINT', async () => {
       console.log("\n🛑 Closing MySQL pool...");
       await db.end();
       process.exit(0);
     });
 
-    // ---- Utility Functions ----
     const getLastStudentID = async () => {
       const [result] = await db.query('SELECT MAX(id) AS lastID FROM student');
       return result[0].lastID || 0;
@@ -92,9 +91,6 @@ const ensureTables = async (db) => {
       return result[0].lastID || 0;
     };
 
-    // ---- Health Check Routes ----
-
-    // Basic health (for ALB target group)
     app.get('/health', (req, res) => {
       return res.status(200).json({
         status: 'ok',
@@ -103,11 +99,9 @@ const ensureTables = async (db) => {
       });
     });
 
-    // DB health (for debugging only)
     app.get('/health/db', async (req, res) => {
       try {
         const [rows] = await db.query('SELECT 1 as db_up');
-
         return res.status(200).json({
           status: 'ok',
           database: 'connected',
@@ -115,10 +109,8 @@ const ensureTables = async (db) => {
           database_name: process.env.database,
           result: rows[0]
         });
-
       } catch (error) {
         console.error('DB health check failed:', error.message);
-
         return res.status(500).json({
           status: 'error',
           database: 'down',
@@ -127,7 +119,6 @@ const ensureTables = async (db) => {
       }
     });
 
-    // ---- Routes ----
     app.get('/', async (req, res) => {
       try {
         const [data] = await db.query("SELECT * FROM student");
@@ -164,13 +155,18 @@ const ensureTables = async (db) => {
         const nextStudentID = lastStudentID + 1;
         const { name, rollNo, class: className } = req.body;
 
+        console.log('📥 New Student Request Received');
+        console.log(`👤 Student Details -> Name: ${name}, RollNo: ${rollNo}, Class: ${className}`);
+
         await db.query(
           `INSERT INTO student (id, name, roll_number, class) VALUES (?, ?, ?, ?)`,
           [nextStudentID, name, rollNo, className]
         );
+
+        console.log(`✅ Student Added Successfully -> ${name}`);
         return res.json({ message: 'Student added successfully' });
       } catch (error) {
-        console.error('Error adding student:', error);
+        console.error('❌ Error adding student:', error);
         return res.status(500).json({ error: 'Error inserting student data' });
       }
     });
@@ -181,13 +177,18 @@ const ensureTables = async (db) => {
         const nextTeacherID = lastTeacherID + 1;
         const { name, subject, class: className } = req.body;
 
+        console.log('📥 New Teacher Request Received');
+        console.log(`👨‍🏫 Teacher Details -> Name: ${name}, Subject: ${subject}, Class: ${className}`);
+
         await db.query(
           `INSERT INTO teacher (id, name, subject, class) VALUES (?, ?, ?, ?)`,
           [nextTeacherID, name, subject, className]
         );
+
+        console.log(`✅ Teacher Added Successfully -> ${name}`);
         return res.json({ message: 'Teacher added successfully' });
       } catch (error) {
-        console.error('Error adding teacher:', error);
+        console.error('❌ Error adding teacher:', error);
         return res.status(500).json({ error: 'Error inserting teacher data' });
       }
     });
@@ -226,7 +227,6 @@ const ensureTables = async (db) => {
       }
     });
 
-    // ---- Start Server After DB Ready ----
     app.listen(3500, () => {
       console.log("🚀 Server running on port 3500");
     });
@@ -236,4 +236,3 @@ const ensureTables = async (db) => {
     process.exit(1);
   }
 })();
-
