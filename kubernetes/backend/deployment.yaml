@@ -22,7 +22,7 @@ spec:
       containers:
       - name: backend
 
-        image: 069301570663.dkr.ecr.us-east-2.amazonaws.com/backend:21
+        image: 069301570663.dkr.ecr.us-east-2.amazonaws.com/backend:12
 
         imagePullPolicy: Always
 
