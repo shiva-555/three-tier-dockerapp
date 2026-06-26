@@ -1,0 +1,14 @@
+*.pem
+*.key
+.env
+terraform.tfstate
+terraform.tfstate.backup
+.terraform/
+node_modules/
+*.log
+backup.sql
+kubeconfig
+secrets.yaml
+awscliv2.zip
+k9s_Linux_amd64.tar.gz
+

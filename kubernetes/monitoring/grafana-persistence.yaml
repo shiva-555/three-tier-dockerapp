@@ -1,7 +1,10 @@
 grafana:
+  service:
+    type: LoadBalancer
+
   persistence:
     enabled: true
-    storageClassName: gp3
+    storageClassName: gp2
     accessModes:
       - ReadWriteOnce
     size: 10Gi
