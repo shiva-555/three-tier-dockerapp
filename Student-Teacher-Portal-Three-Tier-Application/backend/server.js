@@ -129,7 +129,7 @@ const ensureTables = async (db) => {
       }
     });
 
-    app.get('/student', async (req, res) => {
+    app.get('/api/student', async (req, res) => {
       try {
         const [data] = await db.query("SELECT * FROM student");
         return res.json(data);
@@ -139,7 +139,7 @@ const ensureTables = async (db) => {
       }
     });
 
-    app.get('/teacher', async (req, res) => {
+    app.get('/api/teacher', async (req, res) => {
       try {
         const [data] = await db.query("SELECT * FROM teacher");
         return res.json(data);
@@ -149,7 +149,7 @@ const ensureTables = async (db) => {
       }
     });
 
-    app.post('/addstudent', async (req, res) => {
+    app.post('/api/addstudent', async (req, res) => {
       try {
         const lastStudentID = await getLastStudentID();
         const nextStudentID = lastStudentID + 1;
@@ -171,7 +171,7 @@ const ensureTables = async (db) => {
       }
     });
 
-    app.post('/addteacher', async (req, res) => {
+    app.post('/api/addteacher', async (req, res) => {
       try {
         const lastTeacherID = await getLastTeacherID();
         const nextTeacherID = lastTeacherID + 1;
@@ -193,7 +193,7 @@ const ensureTables = async (db) => {
       }
     });
 
-    app.delete('/student/:id', async (req, res) => {
+    app.delete('/api/student/:id', async (req, res) => {
       const studentId = req.params.id;
       try {
         await db.query('DELETE FROM student WHERE id = ?', [studentId]);
@@ -210,7 +210,7 @@ const ensureTables = async (db) => {
       }
     });
 
-    app.delete('/teacher/:id', async (req, res) => {
+    app.delete('/api/teacher/:id', async (req, res) => {
       const teacherId = req.params.id;
       try {
         await db.query('DELETE FROM teacher WHERE id = ?', [teacherId]);
