@@ -5,6 +5,6 @@ metadata:
   namespace: navyojana
 
 data:
-  DB_HOST: "mysql-service"
+  DB_HOST: "navyojana-mysql.ctu4qossmiu7.us-east-2.rds.amazonaws.com"
   DB_NAME: "school"
 
