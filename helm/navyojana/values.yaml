@@ -1,0 +1,61 @@
+backend:
+  replicaCount: 2
+
+  image:
+    repository: 069301570663.dkr.ecr.us-east-2.amazonaws.com/backend
+    tag: "14"
+    pullPolicy: Always
+
+  database:
+    host: navyojana-mysql.ctu4qossmiu7.us-east-2.rds.amazonaws.com
+    name: school
+
+  containerPort: 3500
+
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "250m"
+
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+
+  service:
+    type: ClusterIP
+    port: 3500
+
+
+frontend:
+  replicaCount: 2
+
+  image:
+    repository: 069301570663.dkr.ecr.us-east-2.amazonaws.com/frontendeks
+    tag: "14"
+    pullPolicy: Always
+
+  service:
+    type: ClusterIP
+    port: 80
+    targetPort: 80
+
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 100m
+    limits:
+      memory: 256Mi
+      cpu: 250m
+
+ingress:
+  enabled: true
+
+  className: alb
+
+  groupName: navyojana
+
+  scheme: internet-facing
+
+  targetType: ip
+
+  listenPorts: '[{"HTTP":80}]'

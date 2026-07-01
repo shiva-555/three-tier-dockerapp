@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: navyojana
+  labels:
+    app: backend
+
+spec:
+  replicas: {{ .Values.backend.replicaCount }}
+
+  selector:
+    matchLabels:
+      app: backend
+
+  template:
+    metadata:
+      labels:
+        app: backend
+
+    spec:
+      containers:
+      - name: backend
+
+        image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+
+        imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+
+        ports:
+        - containerPort: {{ .Values.backend.containerPort }}
+
+        env:
+        - name: host
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DB_HOST
+
+        - name: database
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DB_NAME
+
+        - name: user
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: DB_USER
+
+        - name: password
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: DB_PASSWORD
+
+        resources:
+          requests:
+            memory: {{ .Values.backend.resources.requests.memory | quote }}
+            cpu: {{ .Values.backend.resources.requests.cpu | quote }}
+
+          limits:  
+            memory: {{ .Values.backend.resources.limits.memory | quote }}  
+            cpu: {{ .Values.backend.resources.limits.cpu | quote }} 
+
+        livenessProbe:
+          tcpSocket:
+            port: 3500
+          initialDelaySeconds: 30
+          periodSeconds: 10
+
+        readinessProbe:
+          tcpSocket:
+            port: 3500
+          initialDelaySeconds: 15
+          periodSeconds: 5
