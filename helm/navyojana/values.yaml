@@ -3,7 +3,7 @@ backend:
 
   image:
     repository: 069301570663.dkr.ecr.us-east-2.amazonaws.com/backend
-    tag: "14"
+    tag: "20"
     pullPolicy: Always
 
   database:
@@ -31,7 +31,7 @@ frontend:
 
   image:
     repository: 069301570663.dkr.ecr.us-east-2.amazonaws.com/frontendeks
-    tag: "14"
+    tag: "15"
     pullPolicy: Always
 
   service:
