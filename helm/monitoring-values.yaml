@@ -1,0 +1,21 @@
+grafana:
+  grafana.ini:
+    server:
+      root_url: '%(protocol)s://%(domain)s/grafana/'
+      serve_from_sub_path: true
+  persistence:
+    enabled: true
+    existingClaim: grafana-pvc
+  service:
+    type: ClusterIP
+prometheus:
+  prometheusSpec:
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 20Gi
+          storageClassName: gp3

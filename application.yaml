@@ -1,0 +1,431 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  creationTimestamp: "2026-06-22T10:12:33Z"
+  generation: 4233
+  managedFields:
+  - apiVersion: argoproj.io/v1alpha1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        .: {}
+        f:destination:
+          .: {}
+          f:namespace: {}
+          f:server: {}
+        f:project: {}
+        f:source:
+          .: {}
+          f:directory:
+            .: {}
+            f:recurse: {}
+          f:path: {}
+          f:repoURL: {}
+          f:targetRevision: {}
+        f:syncPolicy:
+          .: {}
+          f:automated:
+            .: {}
+            f:enabled: {}
+            f:prune: {}
+            f:selfHeal: {}
+          f:syncOptions: {}
+      f:status:
+        .: {}
+        f:health: {}
+        f:sourceHydrator: {}
+        f:summary: {}
+        f:sync:
+          .: {}
+          f:comparedTo:
+            .: {}
+            f:destination: {}
+            f:source: {}
+    manager: argocd-server
+    operation: Update
+    time: "2026-06-29T14:19:58Z"
+  - apiVersion: argoproj.io/v1alpha1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:controllerNamespace: {}
+        f:health:
+          f:lastTransitionTime: {}
+          f:status: {}
+        f:history: {}
+        f:operationState:
+          .: {}
+          f:finishedAt: {}
+          f:message: {}
+          f:operation:
+            .: {}
+            f:initiatedBy:
+              .: {}
+              f:automated: {}
+            f:retry:
+              .: {}
+              f:limit: {}
+            f:sync:
+              .: {}
+              f:autoHealAttemptsCount: {}
+              f:prune: {}
+              f:resources: {}
+              f:revision: {}
+              f:source:
+                .: {}
+                f:directory:
+                  .: {}
+                  f:recurse: {}
+                f:path: {}
+                f:repoURL: {}
+                f:targetRevision: {}
+              f:syncOptions: {}
+          f:phase: {}
+          f:startedAt: {}
+          f:syncResult:
+            .: {}
+            f:resources: {}
+            f:revision: {}
+            f:source:
+              .: {}
+              f:directory:
+                .: {}
+                f:recurse: {}
+              f:path: {}
+              f:repoURL: {}
+              f:targetRevision: {}
+        f:reconciledAt: {}
+        f:resourceHealthSource: {}
+        f:resources: {}
+        f:sourceType: {}
+        f:summary:
+          f:externalURLs: {}
+          f:images: {}
+        f:sync:
+          f:comparedTo:
+            f:destination:
+              f:namespace: {}
+              f:server: {}
+            f:source:
+              f:directory:
+                .: {}
+                f:recurse: {}
+              f:path: {}
+              f:repoURL: {}
+              f:targetRevision: {}
+          f:revision: {}
+          f:status: {}
+    manager: argocd-application-controller
+    operation: Update
+    time: "2026-07-01T05:56:37Z"
+  name: navyojana
+  namespace: argocd
+  resourceVersion: "2697392"
+  uid: aad3eac7-5ecc-411f-a1d6-8efb923616f2
+spec:
+  destination:
+    namespace: navyojana
+    server: https://B72CFEDE2E15EC7CA2B578ABCC0667AE.gr7.us-east-2.eks.amazonaws.com
+  project: default
+  source:
+    directory:
+      recurse: true
+    path: kubernetes
+    repoURL: https://github.com/shiva-555/three-tier-dockerapp.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      enabled: false
+      prune: false
+      selfHeal: false
+    syncOptions:
+    - CreateNamespace=true
+    - RespectIgnoreDifferences=true
+status:
+  controllerNamespace: argocd
+  health:
+    lastTransitionTime: "2026-06-29T14:43:02Z"
+    status: Progressing
+  history:
+  - deployStartedAt: "2026-06-25T15:21:17Z"
+    deployedAt: "2026-06-25T15:21:19Z"
+    id: 8
+    initiatedBy:
+      username: admin
+    revision: 973f9fb2d578e29752903ae4bd2ad15373a1e479
+    source:
+      directory:
+        recurse: true
+      path: kubernetes
+      repoURL: https://github.com/shiva-555/three-tier-dockerapp.git
+      targetRevision: main
+  - deployStartedAt: "2026-06-26T05:18:12Z"
+    deployedAt: "2026-06-26T05:18:13Z"
+    id: 9
+    initiatedBy:
+      automated: true
+    revision: 450cc6cd1436b08066db5289ce4d68729f57d0d8
+    source:
+      directory:
+        recurse: true
+      path: kubernetes
+      repoURL: https://github.com/shiva-555/three-tier-dockerapp.git
+      targetRevision: main
+  - deployStartedAt: "2026-06-26T05:23:50Z"
+    deployedAt: "2026-06-26T05:23:51Z"
+    id: 10
+    initiatedBy:
+      automated: true
+    revision: 24bfbf3cf653914d19a28f0b44f40856efa75312
+    source:
+      directory:
+        recurse: true
+      path: kubernetes
+      repoURL: https://github.com/shiva-555/three-tier-dockerapp.git
+      targetRevision: main
+  - deployStartedAt: "2026-06-26T05:53:53Z"
+    deployedAt: "2026-06-26T05:53:54Z"
+    id: 11
+    initiatedBy:
+      automated: true
+    revision: 3b99a7250d2925002ee61f498df4507f3b5192bc
+    source:
+      directory:
+        recurse: true
+      path: kubernetes
+      repoURL: https://github.com/shiva-555/three-tier-dockerapp.git
+      targetRevision: main
+  - deployStartedAt: "2026-06-26T15:09:11Z"
+    deployedAt: "2026-06-26T15:09:12Z"
+    id: 12
+    initiatedBy:
+      username: admin
+    revision: 5f0bb1f1ec293f72c52764906d3c591606b2f888
+    source:
+      directory:
+        recurse: true
+      path: kubernetes
+      repoURL: https://github.com/shiva-555/three-tier-dockerapp.git
+      targetRevision: main
+  - deployStartedAt: "2026-06-26T15:13:23Z"
+    deployedAt: "2026-06-26T15:13:24Z"
+    id: 13
+    initiatedBy:
+      username: admin
+    revision: 5f0bb1f1ec293f72c52764906d3c591606b2f888
+    source:
+      directory:
+        recurse: true
+      path: kubernetes
+      repoURL: https://github.com/shiva-555/three-tier-dockerapp.git
+      targetRevision: main
+  - deployStartedAt: "2026-06-26T16:51:40Z"
+    deployedAt: "2026-06-26T16:51:42Z"
+    id: 14
+    initiatedBy:
+      automated: true
+    revision: 94bf331b69e2bb5314ff790335c61898663ec834
+    source:
+      directory:
+        recurse: true
+      path: kubernetes
+      repoURL: https://github.com/shiva-555/three-tier-dockerapp.git
+      targetRevision: main
+  - deployStartedAt: "2026-06-27T15:19:34Z"
+    deployedAt: "2026-06-27T15:19:36Z"
+    id: 15
+    initiatedBy:
+      automated: true
+    revision: 8389293fd541aed7e32aa6dc35c35b7896e1eab3
+    source:
+      directory:
+        recurse: true
+      path: kubernetes
+      repoURL: https://github.com/shiva-555/three-tier-dockerapp.git
+      targetRevision: main
+  - deployStartedAt: "2026-06-27T16:03:27Z"
+    deployedAt: "2026-06-27T16:03:29Z"
+    id: 16
+    initiatedBy:
+      automated: true
+    revision: 1e0951e7e3287cc01070a423000bcf3ac9f8e64b
+    source:
+      directory:
+        recurse: true
+      path: kubernetes
+      repoURL: https://github.com/shiva-555/three-tier-dockerapp.git
+      targetRevision: main
+  - deployStartedAt: "2026-06-27T16:08:26Z"
+    deployedAt: "2026-06-27T16:08:27Z"
+    id: 17
+    initiatedBy:
+      automated: true
+    revision: 51f64b7524915778aa8306e049e0748e6e8310e5
+    source:
+      directory:
+        recurse: true
+      path: kubernetes
+      repoURL: https://github.com/shiva-555/three-tier-dockerapp.git
+      targetRevision: main
+  operationState:
+    finishedAt: "2026-06-29T14:06:59Z"
+    message: successfully synced (all tasks run)
+    operation:
+      initiatedBy:
+        automated: true
+      retry:
+        limit: 5
+      sync:
+        autoHealAttemptsCount: 5
+        prune: true
+        resources:
+        - kind: ConfigMap
+          name: backend-config
+        - group: networking.k8s.io
+          kind: Ingress
+          name: navyojana-ingress
+        revision: 51f64b7524915778aa8306e049e0748e6e8310e5
+        source:
+          directory:
+            recurse: true
+          path: kubernetes
+          repoURL: https://github.com/shiva-555/three-tier-dockerapp.git
+          targetRevision: main
+        syncOptions:
+        - CreateNamespace=true
+        - RespectIgnoreDifferences=true
+    phase: Succeeded
+    startedAt: "2026-06-29T14:06:59Z"
+    syncResult:
+      resources:
+      - group: ""
+        hookPhase: Running
+        kind: ConfigMap
+        message: configmap/backend-config created
+        name: backend-config
+        namespace: navyojana
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: networking.k8s.io
+        hookPhase: Running
+        kind: Ingress
+        message: ingress.networking.k8s.io/navyojana-ingress created
+        name: navyojana-ingress
+        namespace: navyojana
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      revision: 51f64b7524915778aa8306e049e0748e6e8310e5
+      source:
+        directory:
+          recurse: true
+        path: kubernetes
+        repoURL: https://github.com/shiva-555/three-tier-dockerapp.git
+        targetRevision: main
+  reconciledAt: "2026-07-01T05:56:37Z"
+  resourceHealthSource: appTree
+  resources:
+  - kind: ConfigMap
+    name: backend-config
+    namespace: navyojana
+    status: OutOfSync
+    version: v1
+  - kind: Namespace
+    name: navyojana
+    status: Synced
+    version: v1
+  - kind: PersistentVolumeClaim
+    name: grafana-pvc
+    namespace: monitoring
+    status: Synced
+    version: v1
+  - kind: PersistentVolumeClaim
+    name: prometheus-pvc
+    namespace: monitoring
+    status: Synced
+    version: v1
+  - kind: Secret
+    name: backend-secret
+    namespace: navyojana
+    status: Synced
+    version: v1
+  - kind: Service
+    name: backend
+    namespace: navyojana
+    status: OutOfSync
+    version: v1
+  - kind: Service
+    name: backend-service
+    namespace: navyojana
+    status: OutOfSync
+    version: v1
+  - kind: Service
+    name: frontend-service
+    namespace: navyojana
+    status: OutOfSync
+    version: v1
+  - kind: Service
+    name: grafana-proxy
+    namespace: navyojana
+    status: Synced
+    version: v1
+  - kind: Service
+    name: mysql-service
+    namespace: navyojana
+    status: Synced
+    version: v1
+  - group: apps
+    kind: Deployment
+    name: backend-deployment
+    namespace: navyojana
+    status: OutOfSync
+    version: v1
+  - group: apps
+    kind: Deployment
+    name: frontend-deployment
+    namespace: navyojana
+    status: OutOfSync
+    version: v1
+  - group: apps
+    kind: Deployment
+    name: mysql
+    namespace: navyojana
+    status: Synced
+    version: v1
+  - group: networking.k8s.io
+    kind: Ingress
+    name: grafana-ingress
+    namespace: monitoring
+    status: Synced
+    version: v1
+  - group: networking.k8s.io
+    kind: Ingress
+    name: navyojana-ingress
+    namespace: navyojana
+    status: OutOfSync
+    version: v1
+  sourceHydrator: {}
+  sourceType: Directory
+  summary:
+    externalURLs:
+    - http://k8s-navyojana-c013410e03-1310773315.us-east-2.elb.amazonaws.com/
+    - http://k8s-navyojana-c013410e03-1310773315.us-east-2.elb.amazonaws.com/api
+    - http://k8s-navyojana-c013410e03-1310773315.us-east-2.elb.amazonaws.com/grafana
+    images:
+    - 069301570663.dkr.ecr.us-east-2.amazonaws.com/backend:14
+    - 069301570663.dkr.ecr.us-east-2.amazonaws.com/frontendeks:14
+    - 069301570663.dkr.ecr.us-east-2.amazonaws.com/mysql-image:latest
+  sync:
+    comparedTo:
+      destination:
+        namespace: navyojana
+        server: https://B72CFEDE2E15EC7CA2B578ABCC0667AE.gr7.us-east-2.eks.amazonaws.com
+      source:
+        directory:
+          recurse: true
+        path: kubernetes
+        repoURL: https://github.com/shiva-555/three-tier-dockerapp.git
+        targetRevision: main
+    revision: 9d053c49bff584c0de8cedef096d1d7e5e3db898
+    status: OutOfSync
